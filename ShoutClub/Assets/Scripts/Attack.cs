@@ -12,13 +12,10 @@ public class Attack : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Don't do anything if this isn't our own object
         if (!IsOwner) return;
 
-        // Don't hit ourselves
         if (other.transform.root == transform.root) return;
 
-        // Look for the KnockbackReceiver on the other object
             KBR knockback = other.GetComponentInParent<KBR>();
         if (knockback != null)
         {
@@ -26,7 +23,6 @@ public class Attack : NetworkBehaviour
             Vector2 direction = (other.transform.position - transform.position).normalized;
             float force = loudness * 7f;
 
-            // Send it to the server so the knockback works across the network
             ulong targetId = knockback.GetComponent<NetworkObject>().NetworkObjectId;
             ApplyKnockbackServerRpc(targetId, direction, force);
         }

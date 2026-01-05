@@ -54,7 +54,6 @@ public class host : MonoBehaviour
                 allocation.ConnectionData
             );
 
-            // Start the host
             NetworkManager.Singleton.StartHost();
             Debug.Log("Host started with Relay.");
         }
@@ -98,6 +97,7 @@ public class host : MonoBehaviour
                 joinAllocation.HostConnectionData
             );
 
+            lobbyCode.text = null;
             NetworkManager.Singleton.StartClient();
             Debug.Log("Client started with Relay.");
         }
